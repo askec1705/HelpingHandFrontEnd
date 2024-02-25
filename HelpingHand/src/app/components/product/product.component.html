@@ -1,0 +1,21 @@
+
+
+<div *ngIf="productsLoaded" class="mt-5">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div *ngFor="let product of products" class="col">
+      <p-card header="{{product.categoryName}}">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="{{product.images[0].imagePath | apiImage}}" style="height: 9vw;  object-fit: cover;">
+        </ng-template>
+        <p class="text-center">Take a {{product.productName}} now.  </p>
+        <ng-template pTemplate="footer">
+          <div class="d-flex justify-content-between">
+            <button pButton pRipple type="button" label="Details" class="p-button-outlined p-button-rounded" routerLink="/product/{{product.id}}" ></button>
+            <button pButton pRipple type="button" label="Take" class="p-button-outlined p-button-rounded" (click)="process(product)"></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+<div>

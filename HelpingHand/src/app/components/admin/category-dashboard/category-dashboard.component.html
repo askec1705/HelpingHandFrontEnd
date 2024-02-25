@@ -1,0 +1,62 @@
+<p-table #dt [value]="categories" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+  [loading]="!categoriesLoaded" responsiveLayout="scroll" [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id">
+        <div class="flex justify-content-between align-items-center">
+          Id
+          <p-sortIcon field="id"></p-sortIcon>
+          <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Category
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+
+      <th>
+        <div class="flex justify-content-between align-items-center">
+          <button pButton label="Add Category" type="button" icon="pi pi-plus" class="p-button-success" (click)="addCategory()"></button>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-categories>
+    <tr class="p-row">
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{categories.id}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{categories.name}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" key="{{categories.id}}"></p-confirmDialog>
+            <button pButton label="Edit" class="p-button-rounded p-button-sm" (click)="editCategory(categories)"></button>
+            <button pButton label="Delete" class="p-button-rounded p-button-danger p-button-sm" (click)="deleteCategory(categories)"></button>
+          </div>
+        </div>
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No category found.</td>
+    </tr>
+  </ng-template>
+</p-table>

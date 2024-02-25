@@ -1,0 +1,42 @@
+<form [formGroup]="productAddForm">
+  <div class="container">
+    <div class="row">
+
+      <div class="my-3">
+        <p-fileUpload [customUpload]="true" (uploadHandler)="setImages($event)" [multiple]="true" [auto]="true"
+          [maxFileSize]="1000000" [fileLimit]="5" accept="image/*">
+        </p-fileUpload>
+      </div>
+
+      <div class="col-3  mt-2">
+        <h5>Category</h5>
+        <p-dropdown *ngIf="categoriesLoaded" [options]="categories" optionLabel="name" optionValue="id"
+          formControlName="categoryId" [showClear]="true" show placeholder="Select a Category"></p-dropdown>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Product Name</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="productName" type="string" formControlName="productName" pInputText>
+          <label for="productName">Product Name</label>
+        </span>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Address</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="address" type="string" formControlName="address" pInputText>
+          <label for="productName">Address</label>
+        </span>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <h5>Description</h5>
+      <textarea  rows="5" cols="50" pInputTextarea [autoResize]="true"
+        formControlName="description"></textarea>
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <button pButton [disabled]="productAddForm.invalid" type="submit" label="Add" class="p-button-success" (click)="addProduct()"></button>
+  </div>
+</form>
